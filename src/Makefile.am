@@ -5,6 +5,9 @@ bin_PROGRAMS = snp-dists
 snp_dists_SOURCES = main.c snpdists.c
 snp_dists_CFLAGS = -std=c99
 snp_dists_LDADD = libsnp-dists.la -lz
+if STATIC_COMPILE
+snp_dists_LDFLAGS = -all-static
+endif
 
 # libsnp_dists.so is our library
 lib_LTLIBRARIES = libsnp-dists.la
