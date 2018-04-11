@@ -94,8 +94,8 @@ int compute_distance_matrix(int quiet, int csv, int corner, char* fasta, char* p
   if (!quiet) fprintf(stderr, "%s has size %lu bytes\n", fasta, filesize);
 
   // load all the sequences
-  char* seq[MAX_SEQ];
-  char* name[MAX_SEQ];
+  char** seq = (char**)malloc(sizeof(char) * MAX_SEQ);
+  char** name = (char**)malloc(sizeof(char) * MAX_SEQ);
   int l, N=0, L=-1;
   kseq_t* kseq = kseq_init(fp);
 
@@ -146,6 +146,9 @@ int compute_distance_matrix(int quiet, int csv, int corner, char* fasta, char* p
     free(seq[n]);
     free(name[n]);
   }
+
+  free(seq);
+  free(name);
 
   return 0;
 }
